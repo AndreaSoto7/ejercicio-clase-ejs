@@ -1,0 +1,28 @@
+</body>
+<script type="text/javascript">
+    function onSearchClick(e) {
+        e.preventDefault();
+        console.log("searching...");
+        const searchText = document.getElementById("searchBox").value;
+        const tblPersonaRows = document
+            .getElementById("tblPersonas")
+            .getElementsByTagName("tbody")[0]
+            .getElementsByTagName("tr");
+        for (const row in tblPersonaRows) {
+            const rowElement = tblPersonaRows[row];
+            const secondCell = rowElement.getElementsByTagName("td")[1];
+            const thirdCell = rowElement.getElementsByTagName("td")[2];
+            if (!secondCell) continue;
+            const nameText = secondCell.textContent.toLowerCase();
+            const lastNameText = thirdCell.textContent.toLowerCase();
+            if (nameText.includes(searchText.toLowerCase()) || lastNameText.includes(searchText.toLowerCase())) {
+                rowElement.style.display = "";
+            } else {
+                rowElement.style.display = "none";
+            }
+        }
+        return false;
+    }
+</script>
+
+</html>

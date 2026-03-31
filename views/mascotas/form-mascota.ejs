@@ -1,0 +1,35 @@
+<%- include('../components/header.ejs') %>
+
+    <div class="container">
+        <div class="row mt-2 mb-2">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h1>Formulario de Mascota</h1>
+                        </div>
+                        <form action="" method="post">
+                            <div class="mb-2">
+                                <label class="form-label" for="nombre">Nombre</label>
+                                <input class="form-control" type="text" name="nombre" id="nombre"
+                                    value="<%=mascota?.nombre %>">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="tipo">Tipo</label>
+                                <select name="tipo" id="tipo">
+                                    <option value="">Seleccionar Tipo</option>
+                                    <option value="perro" <%= (mascota?.tipo === 'perro') ? 'selected' : '' %>>Perro</option>
+                                    <option value="gato" <%= (mascota?.tipo === 'gato') ? 'selected' : '' %>>Gato</option>
+                                    <option value="pájaro" <%= (mascota?.tipo === 'pájaro') ? 'selected' : '' %>>Pájaro</option>
+                                    <option value="llama" <%= (mascota?.tipo === 'llama') ? 'selected' : '' %>>Llama</option>   
+                                    <option value="urina" <%= (mascota?.tipo === 'urina') ? 'selected' : '' %>>Urina</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Mascota</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer.ejs') %>

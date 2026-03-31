@@ -1,0 +1,45 @@
+<%- include('../components/header.ejs') %>
+
+    <div class="container">
+        <div class="row mt-2 mb-2">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h1>Formulario de Persona</h1>
+                        </div>
+                        <form action="" method="post">
+                            <%- include('../components/error-panel.ejs') %>
+                                <div class="mb-2">
+                                    <label class="form-label" for="nombre">Nombre</label>
+                                    <input class="form-control" type="text" name="nombre" id="nombre"
+                                        value="<%=persona?.nombre %>">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label" for="apellido">Apellido</label>
+                                    <input class="form-control" type="text" name="apellido" id="apellido"
+                                        value="<%=persona?.apellido %>">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label" for="edad">Edad</label>
+                                    <input class="form-control" type="number" name="edad" id="edad"
+                                        value="<%=persona?.edad %>">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label" for="ciudad">Ciudad</label>
+                                    <input class="form-control" type="text" name="ciudad" id="ciudad"
+                                        value="<%=persona?.ciudad %>">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label" for="fechaNacimiento">Fecha de Nacimiento</label>
+                                    <input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento"
+                                        value="<%=persona?.fechaNacimiento?.toISOString().split('T')[0] %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar Persona</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer.ejs') %>
