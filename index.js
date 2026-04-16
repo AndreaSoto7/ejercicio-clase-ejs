@@ -14,7 +14,7 @@ app.use(session({
     secret: 'esta es la clave de encriptación de la sesión y puede ser cualquier texto'
 }));
 
-require('./controllers')(app, db);
+require('./routes')(app);
 
 // Para habilitar la BD
 db.sequelize.sync({
