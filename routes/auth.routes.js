@@ -2,8 +2,7 @@ const { checkUser } = require("../middlewares/check-user.js");
 
 module.exports = app => {
     let router = require('express').Router();
-
-    const controller = require('../controllers/auth.controller');
+    const controller = require('../controllers/auth.controller.js');
 
     router.get('/login', controller.loginGet);
     router.post('/login', controller.loginPost);
@@ -11,6 +10,6 @@ module.exports = app => {
     router.post('/register', controller.registerPost);
     router.get('/logout', checkUser, controller.logoutPost);
 
-    app.use('/auth', router);
+    app.use('/', router);
 
 }
