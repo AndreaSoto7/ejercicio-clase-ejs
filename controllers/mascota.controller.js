@@ -1,8 +1,9 @@
 const { checkUser } = require("../middlewares/check-user");
-const db = require("../models");
+const { getMascotaList, createMascota, getMascotaById, updateMascota } = require("../services/mascotas.service");
+
 
     exports.mascotasGet =  async (req, res) => {
-        const mascotas = await db.mascota.findAll();
+        const mascotas = await getMascotaList()
         res.render('mascotas/list-mascota', { mascotas });
     };
     exports.mascotaCreateGet = (req, res) => {
@@ -10,30 +11,23 @@ const db = require("../models");
     };
     exports.mascotaCreatePost = async (req, res) => {
         const { nombre, tipo } = req.body;
-        const mascota = await db.mascota.create({
-            nombre,
-            tipo
-        });
+        const mascota = await createMascota(nombre, tipo);
         res.redirect('/mascotas');
     };
     exports.mascotaUpdateGet = async (req, res) => {
         const { id } = req.params;
-        const mascota = await db.mascota.findByPk(id);
+        const mascota = await getMascotaById(id);
         res.render('mascotas/form-mascota', { mascota });
     };
     exports.mascotaUpdatePost = async (req, res) => {
         const { id } = req.params;
         const { nombre, tipo } = req.body;
-        const mascota = await db.mascota.findByPk(id);
-        mascota.nombre = nombre;
-        mascota.tipo = tipo;
-        await mascota.save();
+        const mascota = await updateMascota(id, nombre, tipo);
         res.redirect('/mascotas');
     };
     exports.mascotaDelete = async (req, res) => {
         const { id } = req.params;
-        const mascota = await db.mascota.findByPk(id);
-        await mascota.destroy();
+        await deleteMascota(id);
         res.redirect('/mascotas');
     };
     
