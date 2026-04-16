@@ -1,5 +1,5 @@
 const { Op } = require("sequelize")
-const db = require("../models");
+const { searchPersonas } = require("../services/personas.service");
 
     exports.home = (req, res) => {
         res.send('Hello World!')
@@ -20,21 +20,6 @@ const db = require("../models");
     };
     exports.search = async(req, res) => {
         const { q } = req.query;
-        const personas = await db.persona.findAll({
-            where: {
-                [Op.or]: [
-                    {
-                        nombre: {
-                            [Op.like]: `%${q}%`
-                        }
-                    },
-                    {
-                        apellido: {
-                            [Op.like]: `%${q}%`
-                        }
-                    }
-                ]
-            }
-        });
+        const personas = searchPersonas(q);
         res.render('personas/list-persona', { personas });
     };

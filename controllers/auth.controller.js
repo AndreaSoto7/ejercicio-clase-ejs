@@ -1,16 +1,12 @@
 const { sha1Encode } = require("../utils/text.utils");
-const db = require("../models");
+const { findUserByEmail, createUser } = require("../services/auth.service");
 
     exports.loginGet = (req, res) => {
         res.render('auth/form-login');
     };
     exports.loginPost = async (req, res) => {
         const { email, password } = req.body;
-        const usuario = await db.usuario.findOne({
-            where: {
-                email
-            }
-        });
+        const usuario = await findUserByEmail(email);
         if (!usuario) {
             return res.render('auth/form-login', { error: 'Usuario o contraseña incorrectas' });
         }
@@ -30,20 +26,12 @@ const db = require("../models");
     };
     exports.registerPost = async (req, res) => {
         const { email, password, nombreCompleto } = req.body;
-        const existingUser = await db.usuario.findOne({
-            where: {
-                email
-            }
-        });
+        const existingUser = await findUserByEmail(email);
         if (existingUser) {
             return res.render('auth/form-register', { error: 'El email ya está registrado' });
         }
         const encodedPassword = sha1Encode(password);
-        await db.usuario.create({
-            email,
-            password: encodedPassword,
-            nombreCompleto
-        });
+        await createUser(email, encodedPassword, nombreCompleto);
         res.redirect('/login');
     };
     exports.logoutPost = (req, res) => {
