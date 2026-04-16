@@ -11,6 +11,6 @@ module.exports = app => {
     router.post('/register', controller.registerPost);
     router.get('/logout', checkUser, controller.logoutPost);
 
-    app.use('/inscripciones', router);
+    app.use('/auth', router);
 
 }
