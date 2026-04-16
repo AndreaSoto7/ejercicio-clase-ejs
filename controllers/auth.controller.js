@@ -1,11 +1,10 @@
 const { sha1Encode } = require("../utils/text.utils");
+const db = require("../models");
 
-module.exports = (app, db) => {
-
-    loginGet = (req, res) => {
+    exports.loginGet = (req, res) => {
         res.render('auth/form-login');
     };
-    loginPost = async (req, res) => {
+    exports.loginPost = async (req, res) => {
         const { email, password } = req.body;
         const usuario = await db.usuario.findOne({
             where: {
@@ -26,10 +25,10 @@ module.exports = (app, db) => {
         }
         res.redirect('/personas');
     };
-    registerGet = (req, res) => {
+    exports.registerGet = (req, res) => {
         res.render('auth/form-register');
     };
-    registerPost = async (req, res) => {
+    exports.registerPost = async (req, res) => {
         const { email, password, nombreCompleto } = req.body;
         const existingUser = await db.usuario.findOne({
             where: {
@@ -47,8 +46,8 @@ module.exports = (app, db) => {
         });
         res.redirect('/login');
     };
-    logoutPost = (req, res) => {
+    exports.logoutPost = (req, res) => {
         req.session.user = null;
         res.redirect('/login');
     };
-}
+    

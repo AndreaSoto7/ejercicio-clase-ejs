@@ -1,5 +1,5 @@
 const { Op } = require("sequelize")
-const { checkUser } = require("../middlewares/check-user")
+const db = require("../models");
 
     exports.home = (req, res) => {
         res.send('Hello World!')
@@ -18,7 +18,7 @@ const { checkUser } = require("../middlewares/check-user")
         const { name, lastName } = req.body;
         res.render('prueba-ejs', { name, lastName });
     };
-    exports.search = (req, res) => {
+    exports.search = async(req, res) => {
         const { q } = req.query;
         const personas = await db.persona.findAll({
             where: {
