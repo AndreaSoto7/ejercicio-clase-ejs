@@ -2,8 +2,7 @@ const { checkUser } = require("../middlewares/check-user.js");
 
 module.exports = app => {
     let router = require('express').Router();
-
-    const controller = require('../controllers/home.controller');
+    const controller = require('../controllers/home.controller.js');
 
     router.get('/', controller.home);
     router.get('/hello', controller.helloGet);
