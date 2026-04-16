@@ -3,25 +3,24 @@ const { checkUser } = require("../middlewares/check-user")
 
 module.exports = (app, db) => {
 
-    app.get('/', (req, res) => {
+    home = (req, res) => {
         res.send('Hello World!')
-
-    })
-    app.get('/hello', (req, res) => {
+    };
+    helloGet = (req, res) => {
         res.sendFile(__dirname + '/../hello.html')
-    })
+    };
 
-    app.get('/hello-ejs', (req, res) => {
+    helloEjs = (req, res) => {
         res.render('prueba-ejs', { name: 'Juan', lastName: 'Perez' });
-    });
-    app.get('/form', (req, res) => {
+    };
+    formGet = (req, res) => {
         res.render('form-ejemplo');
-    });
-    app.post('/form-submit', (req, res) => {
+    };
+    formPost = (req, res) => {
         const { name, lastName } = req.body;
         res.render('prueba-ejs', { name, lastName });
-    });
-    app.get('/search', checkUser, async (req, res) => {
+    };
+    search =  async (req, res) => {
         const { q } = req.query;
         const personas = await db.persona.findAll({
             where: {
@@ -40,5 +39,5 @@ module.exports = (app, db) => {
             }
         });
         res.render('personas/list-persona', { personas });
-    });
+    };
 }
