@@ -1,4 +1,5 @@
 const { checkUser } = require("../middlewares/check-user");
+const db = require("../models");
 
     exports.personasGet = async (req, res) => {
         const personas = await db.persona.findAll();

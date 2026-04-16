@@ -1,4 +1,5 @@
 const { checkUser } = require("../middlewares/check-user");
+const db = require("../models");
 
     exports.mascotasGet =  async (req, res) => {
         const mascotas = await db.mascota.findAll();

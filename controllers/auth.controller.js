@@ -1,4 +1,5 @@
 const { sha1Encode } = require("../utils/text.utils");
+const db = require("../models");
 
     exports.loginGet = (req, res) => {
         res.render('auth/form-login');
