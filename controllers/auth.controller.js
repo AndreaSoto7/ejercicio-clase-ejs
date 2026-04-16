@@ -47,7 +47,7 @@ module.exports = (app, db) => {
         });
         res.redirect('/login');
     };
-    logoutGet = (req, res) => {
+    logoutPost = (req, res) => {
         req.session.user = null;
         res.redirect('/login');
     };
